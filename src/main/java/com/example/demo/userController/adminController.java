@@ -4,10 +4,10 @@ import com.example.demo.entities.user;
 import com.example.demo.userDAO.userServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import javax.persistence.PostUpdate;
+import java.util.ArrayList;
 
 @RestController
 @Controller
@@ -18,5 +18,16 @@ public class adminController {
     public @ResponseBody user addUsers(@RequestBody user u)
     {
         return userServ.addUser(u);
+    }
+
+    @GetMapping(value = "user/getAll")
+    public ArrayList<user> getAll()
+    {
+        return userServ.getAll();
+    }
+    @PostMapping( value="user/updateUser")
+    public @ResponseBody user updateUser(user u)
+    {
+       return userServ.update(u);
     }
 }

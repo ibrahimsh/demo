@@ -6,18 +6,24 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import javax.persistence.PostUpdate;
+
 import java.util.ArrayList;
 
 @RestController
 @Controller
+@CrossOrigin("*")
 public class adminController {
    @Autowired
     private userServices userServ;
     @PostMapping(value="user/addUser/")
-    public @ResponseBody user addUsers(@RequestBody user u)
+   /* @RequestMapping(
+            value = "user/addUser/",
+            produces = "application/json",
+            method = {RequestMethod.POST})*/
+    public String addUsers(@RequestBody user u)
     {
-        return userServ.addUser(u);
+        userServ.addUser(u);
+        return "done";
     }
 
     @GetMapping(value = "user/getAll")

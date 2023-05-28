@@ -1,11 +1,12 @@
 package com.example.demo.entities;
 
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
-import javax.persistence.*;
+
 
 @Entity
 @Table(name="users")
@@ -23,4 +24,6 @@ public class user {
     @Column private String password;
     @Column private String phone;
     @Column private String address;
+    @Column private String message;
+    @Column private String  notes;
 }

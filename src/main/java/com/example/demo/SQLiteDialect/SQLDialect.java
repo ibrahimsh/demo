@@ -1,14 +1,36 @@
 package com.example.demo.SQLiteDialect;
 import java.sql.Types;
 
+import org.hibernate.cfg.Environment;
 import org.hibernate.dialect.Dialect;
 import org.hibernate.dialect.function.StandardSQLFunction;
-import org.hibernate.dialect.function.SQLFunctionTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.jdbc.datasource.DriverManagerDataSource;
+
+import javax.sql.DataSource;
+/*import org.hibernate.dialect.function.SQLFunctionTemplate;
 import org.hibernate.dialect.function.VarArgsSQLFunction;
 import org.hibernate.type.StringType;
+*/
 
-    public class SQLDialect extends Dialect {
-        public SQLDialect() {
+
+
+public class SQLDialect extends Dialect {
+
+    @Autowired
+    Environment env;
+
+    @Bean
+    public DataSource dataSource() {
+        final DriverManagerDataSource dataSource = new DriverManagerDataSource();
+        dataSource.setDriverClassName(String.valueOf(env.getClass()));
+        dataSource.setUrl(String.valueOf(env.getClass()));
+        dataSource.setUsername(String.valueOf(env.getClass()));
+        dataSource.setPassword(String.valueOf(env.getClass()));
+        return dataSource;
+    }
+  /*      public SQLDialect() {
             registerColumnType(Types.BIT, "integer");
             registerColumnType(Types.TINYINT, "tinyint");
             registerColumnType(Types.SMALLINT, "smallint");
@@ -133,5 +155,8 @@ import org.hibernate.type.StringType;
         public boolean supportsCascadeDelete() {
             return false;
         }
-    }
+
+   */
+
+}
 
